@@ -1,6 +1,7 @@
 package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,16 +45,37 @@ public abstract class Item {
     category.getItems().add(this);
   }
 
-  public void changeName(String name) {
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setName(String name) {
     this.name = name;
   }
 
-  public void changePrice(int price) {
+  public void setPrice(int price) {
     this.price = price;
   }
 
-  public void changeStock(int stock) {
+  public void setStock(int stock) {
     this.stock = stock;
+  }
+
+  public void addStock(int stock) {
+    this.stock += stock;
+  }
+
+  /**
+   * 재고 마이너스 비즈니스 로직
+   * @param stock
+   */
+  public void removeStock(int stock) {
+    int resultStock = this.stock - stock;
+
+    if (resultStock < 0) {
+      throw new NotEnoughStockException("need more stock");
+    }
+    this.stock = resultStock;
   }
 
 }

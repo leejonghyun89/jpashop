@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @Entity
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
   @Id @GeneratedValue
@@ -30,8 +33,18 @@ public class Member {
   @OneToMany(mappedBy = "member")
   private List<Order> orders = new ArrayList<>();
 
-  public void changeName(String name) {
+  public Member(String name,
+                Address address) {
     this.name = name;
+    this.address = address;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
   }
 
 }

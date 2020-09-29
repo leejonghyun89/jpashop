@@ -14,8 +14,7 @@ import javax.persistence.PersistenceContext;
 @RequiredArgsConstructor
 public class CategoryRepository {
 
-  @PersistenceContext
-  private EntityManager em;
+  private final EntityManager em;
 
   public Long save(Category category) {
     em.persist(category);

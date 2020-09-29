@@ -24,9 +24,9 @@ public class Album extends Item {
                int stock,
                String artist,
                String etc) {
-    this.changeName(name);
-    this.changePrice(price);
-    this.changeStock(stock);
+    this.setName(name);
+    this.setPrice(price);
+    this.setStock(stock);
     this.artist = artist;
     this.etc = etc;
   }

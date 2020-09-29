@@ -24,9 +24,9 @@ public class Movie extends Item {
                int stock,
                String director,
                String actor) {
-    this.changeName(name);
-    this.changePrice(price);
-    this.changeStock(stock);
+    this.setName(name);
+    this.setPrice(price);
+    this.setStock(stock);
     this.director = director;
     this.actor = actor;
   }

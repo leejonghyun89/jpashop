@@ -3,6 +3,7 @@ package jpabook.jpashop.domain.item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.ObjectUtils;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -19,14 +20,19 @@ public class Book extends Item {
   private String author;
   private String isbn;
 
-  public Book(String name,
+  public Book(Long id,
+              String name,
               int price,
               int stock,
               String author,
               String isbn) {
-    this.changeName(name);
-    this.changePrice(price);
-    this.changeStock(stock);
+
+    if (!ObjectUtils.isEmpty(id)) {
+      this.setId(id);
+    }
+    this.setName(name);
+    this.setPrice(price);
+    this.setStock(stock);
     this.author = author;
     this.isbn = isbn;
   }

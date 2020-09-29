@@ -2,14 +2,9 @@ package jpabook.jpashop.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
+import static javax.persistence.FetchType.*;
 
 /**
  * Created by JongHyun Lee on 2020-09-14
@@ -22,7 +17,7 @@ public class Delivery {
   @Column(name = "delivery_id")
   private Long id;
 
-  @OneToOne(mappedBy = "delivery")
+  @OneToOne(mappedBy = "delivery", fetch = LAZY)
   private Order order;
 
   @Embedded
@@ -30,4 +25,17 @@ public class Delivery {
 
   @Enumerated(EnumType.STRING)
   private DeliveryStatus status;
+
+  public void setOrder(Order order) {
+    this.order = order;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public void setStatus(DeliveryStatus status) {
+    this.status = status;
+  }
+
 }

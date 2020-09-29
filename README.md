@@ -1,7 +1,12 @@
 ### 프로젝트 생성 및 라이브러리
  1. 해당 프로젝트 생성은 spring boot starter(https://start.spring.io/) 에서 쉽게 프로젝트르 생성 할 수 있음.
  
- 2. 프로젝트 생성 시 필요한 라이브러리는 하단과 같다.
+ 2. 엔티디 도메인 모델 패턴으로 진행한다.
+  - 엔티티 도메인은 도메인에 비지니스 로직을 추가하는 패턴을 말한다.
+  - 엔티티 도메인과 다른 방법은 트랜잭션 스크립트 패턴이 있다.
+  - 트랜잭션 스크립트 패션은 서비스 계층에서 비즈니스 로직을 처리한다.
+ 
+ 3. 프로젝트 생성 시 필요한 라이브러리는 하단과 같다.
   
   - Spring Boot Starter Data JPA
   - Spring Boot Starter Web
@@ -9,7 +14,6 @@
   - Spring Boot Devtools
   - Lombok
   - H2 Database
- 
 
 ---
 ### 요구사항
