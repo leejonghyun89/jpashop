@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.api.MemberApiController;
 import jpabook.jpashop.domain.Member;
 
 import java.util.List;
@@ -14,5 +15,8 @@ public interface MemberService {
   List<Member> findMembers();
 
   Member findOne(Long id);
+
+  Member update(Long id,
+                MemberApiController.UpdateMemberRequest request);
 
 }

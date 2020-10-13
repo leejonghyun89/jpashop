@@ -4,18 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,7 +21,7 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
-  @Id @GeneratedValue
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "order_id")
   private Long id;
 
@@ -120,7 +109,7 @@ public class Order {
     int totalPrice = 0;
 
     for (OrderItem orderItem : orderItems) {
-      totalPrice += orderItem.getOrderPrice();
+      totalPrice += orderItem.getOrderPrice() * orderItem.getCount();
     }
 
     return totalPrice;

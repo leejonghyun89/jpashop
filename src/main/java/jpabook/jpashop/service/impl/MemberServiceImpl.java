@@ -1,5 +1,6 @@
 package jpabook.jpashop.service.impl;
 
+import jpabook.jpashop.api.MemberApiController;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.service.MemberService;
@@ -48,6 +49,15 @@ public class MemberServiceImpl implements MemberService {
    */
   public Member findOne(Long id) {
     return memberRepository.findById(id);
+  }
+
+  @Override
+  @Transactional
+  public Member update(Long id,
+                       MemberApiController.UpdateMemberRequest request) {
+    Member member = memberRepository.findById(id);
+    member.setName(request.getName());
+    return member;
   }
 
   /**

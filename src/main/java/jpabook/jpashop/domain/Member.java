@@ -1,15 +1,11 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-  @Id @GeneratedValue
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "member_id")
   private Long id;
 
@@ -30,6 +26,7 @@ public class Member {
   @Embedded
   private Address address = new Address();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "member")
   private List<Order> orders = new ArrayList<>();
 
@@ -37,6 +34,10 @@ public class Member {
                 Address address) {
     this.name = name;
     this.address = address;
+  }
+
+  public Member(String name) {
+    this.name = name;
   }
 
   public void setName(String name) {

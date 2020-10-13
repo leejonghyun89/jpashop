@@ -1,17 +1,12 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.jpashop.domain.item.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -24,7 +19,7 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
-  @Id @GeneratedValue
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "order_item_id")
   private Long id;
 
@@ -32,6 +27,7 @@ public class OrderItem {
   @JoinColumn(name = "item_id")
   private Item item;
 
+  @JsonIgnore
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "order_id")
   private Order order;
@@ -87,7 +83,7 @@ public class OrderItem {
    * @return
    */
   public int getOrderPrice() {
-    return orderPrice * count;
+    return orderPrice;
   }
 
 }
